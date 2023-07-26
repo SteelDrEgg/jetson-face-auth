@@ -1,0 +1,89 @@
+<!doctype html>
+<!--
+This code is tweaked from the original at:
+    https://github.com/dusty-nv/jetson-inference/blob/master/python/www/html/index.html
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hello AI World</title>
+    <script type='text/javascript' src='https://webrtc.github.io/adapter/adapter-latest.js'></script>
+    <script type='text/javascript' src='/webrtc.js'></script>
+    <script type='text/javascript'>
+      play = function() {
+        playStream(document.getElementById('play-stream').value, document.getElementById('video-player'));
+      };
+
+      send = function() {
+        if( sendStream(getWebsocketURL('input'), document.getElementById('send-stream').value) )
+          play(); // autoplay browser stream
+      }
+
+      window.onload = function() {
+        var playStream = document.getElementById('play-stream');
+        var sendStream = document.getElementById('send-stream');
+        var sendButton = document.getElementById('send-button');
+
+        playStream.value = getWebsocketURL('output');
+
+        // populate the list of browser video devices (requires HTTPS)
+        if( checkMediaDevices() ) {
+          navigator.mediaDevices.getUserMedia({audio: false, video: true}).then((stream) => { // get permission from user
+            navigator.mediaDevices.enumerateDevices().then((devices) => {
+              stream.getTracks().forEach(track => track.stop()); // close the device opened to get permissions
+              devices.forEach((device) => {
+                if( device.kind == 'videoinput' ) {
+                  console.log(`Browser media device:  ${device.kind}  label=${device.label}  id=${device.deviceId}`);
+                  sendStream.add(new Option(device.label, device.deviceId));
+                }
+              });
+              if( sendStream.options.length == 0 ) {
+                sendStream.add(new Option('browser has no webcams available'));
+                sendButton.disabled = true;
+              }
+            });
+          }).catch(reportError);
+        }
+        else
+        {
+          sendStream.add(new Option('use HTTPS to enable browser webcam'));
+          sendButton.disabled = true;
+        }
+      }
+
+    </script>
+</head>
+
+<body style="background-color:#333333; color:#FFFFFF; font-family:Arial; width=100%">
+<div style="float: left;width:65%">
+    <div>
+        <video style="max-width: 100%" id="video-player" autoplay controls playsinline muted>Your browser does not
+            support
+            video
+        </video>
+    </div>
+<!--        <div>-->
+<!--            <label for="send-stream">Webcam:</label>-->
+<!--            <select id="send-stream" name="send-stream" style="width: 245;"></select>-->
+<!--            <button id="send-button" onclick="send()">Send</button>-->
+<!--        </div>-->
+        <div>
+            <label for="play-stream">Stream:</label>
+            <input id="play-stream" name="play-stream" type="text" size="32">
+            <button id="play-button" onclick="play()">Play</button>
+        </div>
+</div>
+<div style="float: right; width: 30%; padding-right: 1%">
+    <textarea style="height: 80vh; width: 100%" id="logs" disabled></textarea>
+    <button onclick="refreshLog()">refresh</button>
+    <script>
+    async function refreshLog() {
+        var textarea = document.getElementById("logs");
+        const response = await fetch("/student.log");
+        textarea.value = await response.text();
+    }
+
+    </script>
+</div>
+</body>
+</html>
