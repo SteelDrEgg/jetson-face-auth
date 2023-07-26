@@ -17,7 +17,7 @@ What this program does is basicly log when people get out and get in the buildin
 
 I trained `efficientnet_v2_s` with a dataset with 300 picture of each person for 250 epochs.
 
-#### Training the model
+### Training the model
 1. download scripts from `https://github.com/dusty-nv/pytorch-clboldassification`
 2. add parameters
     ```
@@ -30,7 +30,7 @@ I trained `efficientnet_v2_s` with a dataset with 300 picture of each person for
 <details open>
 <summary>
 
-#### Run the program
+### Run the program
 </summary>
 
 1. Put model file `.onnx` and `labels.txt` in directory `./models`
