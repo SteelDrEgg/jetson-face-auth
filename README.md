@@ -15,7 +15,7 @@ What this program does is basicly log when people get out and get in the buildin
 
 </summary>
 
-I trained `efficientnet_v2_s` with a dataset with 300 picture of each person for 250 epochs.
+I trained `efficientnet_v2_s` with a dataset with 300 picture of each person for 250 epochs, and it results in a decent accuracy.
 
 ### Training the model
 1. download scripts from `https://github.com/dusty-nv/pytorch-clboldassification`
