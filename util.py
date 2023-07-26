@@ -30,6 +30,8 @@ class logHandler():
             return False
 
     def addRec(self, name):
+        if name=="Nothing":
+            pass
         if self.isIn(name):
             ops = "In"
         else:
