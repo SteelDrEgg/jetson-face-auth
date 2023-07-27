@@ -4,9 +4,12 @@
 
 </div>
 
-This is my first project on jetson
-
-What this program does is basicly log when people get out and get in the building, and stop strangers from getting in the building
+This is my first project on jetson.
+It does two things:
+1. give residence a PASS
+![PASS](doc/PASS.png)
+2. give bad guy a DENY
+![DENY](doc/DENY.png)
 
 <details open>
 <summary>
