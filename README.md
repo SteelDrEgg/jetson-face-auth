@@ -46,6 +46,7 @@ This project is **for myself**, which means that my code is optimized for my mod
 
 ### Run the project
 </summary>
+
 Before running, please make sure that **jetson-inference is installed**. If not, please follow [this guide](https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md) to make install.
 
 #### Running
