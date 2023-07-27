@@ -83,19 +83,18 @@ class Stream(threading.Thread):
 
             theOne = guesses[possibilities.index(max(possibilities))]
             
-            if theOne == "Nothing":
-                    self.lastObj = "Nothing"
-                    self.status = "DENY"
             # If the confidence is above 80
-            elif max(possibilities) > 80 and theOne != self.lastObj:
-                # Log it
-                self.logHandler.addRec(classLabel)
-                # print(classLabel)
-                self.status = "PASS"
-                self.lastObj = theOne
+            if max(possibilities) > 80 and ("Nothing" not in classLabel) and classID!=3:
+                if theOne == self.lastObj:
+                    pass
+                else:
+                    # Log it
+                    self.logHandler.addRec(classLabel)
+                    self.status = "PASS"
+                    self.lastObj = theOne
             else:
                 self.lastObj = "Nothing"
-                self.status = "ALARM"
+                self.status = "DENY"
 
             self.frames = 0
             self.guess = {}

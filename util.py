@@ -42,5 +42,5 @@ class logHandler():
         cur.execute("SELECT * FROM log WHERE rowid = ?", (rowid,))
         ist = cur.fetchone()
         open("student.log", "a").write(f"{ist[0]}\t{ist[1]}\t{ist[2]}\n")
-        # self.logFile.write(f"{ist[0]}\t{ist[1]}\t{ist[2]}\n")
+        # self.logFile.write(f"{ist[0]}\t\t{ist[1]}\t{ist[2]}\n")
         cur.close()
