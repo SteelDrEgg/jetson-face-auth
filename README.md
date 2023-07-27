@@ -2,7 +2,13 @@
 
 # Jetson Face Auth
 
+*A practice of embedded AI face authentication*
+
 </div>
+
+<br>
+
+### Intro
 
 This is my first project on jetson.
 It does two things:
@@ -22,7 +28,7 @@ It does two things:
 This project is **for myself**, which means that my code is optimized for my model. Here's some parameters I use to train the model.
 - Specify model `arch=efficientnet_v2_s`
 - Turn pretrained off `pretrained=False`
-- Set blank background with labelID of `3` and name of `Nothing`
+- Set labelID and name of blank background to `3` and `Nothing`
 
 #### Training the model
 1. download scripts from `https://github.com/dusty-nv/pytorch-clboldassification`
@@ -40,8 +46,10 @@ This project is **for myself**, which means that my code is optimized for my mod
 
 ### Run the project
 </summary>
+Before running, please make sure that **jetson-inference is installed**. If not, please follow [this guide](https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md) to make install.
 
 #### Running
+
 1. Put model file `.onnx` and `labels.txt` in directory `./models`
 2. Rename your model to `target.onnx`
 3. Run 
